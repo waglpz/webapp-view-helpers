@@ -1,0 +1,62 @@
+{
+    "name": "waglpz/webapp-view-helpers",
+    "description": "Collection of view helpers and these factory.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alexander Hutorezki",
+            "email": "alexander.hutorezki@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "optimize-autoloader": true,
+        "apcu-autoloader": true,
+        "discard-changes": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "require": {
+        "php": "^7.4",
+        "ext-apcu": "*",
+        "ext-intl": "*",
+        "doctrine/coding-standard": "^8.2"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^0.12",
+        "phpstan/phpstan-deprecation-rules": "^0.12",
+        "phpstan/phpstan-doctrine": "^0.12",
+        "phpstan/phpstan-phpunit": "^0.12",
+        "phpstan/phpstan-strict-rules": "^0.12",
+        "phpstan/phpstan-symfony": "^0.12",
+        "phpstan/phpstan-webmozart-assert": "^0.12",
+        "phpunit/phpunit": "^9.1",
+        "roave/security-advisories": "dev-master",
+        "squizlabs/php_codesniffer": "^3.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Waglpz\\View\\Helpers\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Waglpz\\View\\Helpers\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "cs-check": "phpcs -p --parallel=100",
+        "cs-fix": "phpcbf -p --parallel=100",
+        "test": "phpunit --colors=always tests",
+        "analyse": [
+            "phpstan analyse --configuration=phpstan.neon src/ tests/ --level max"
+        ],
+        "check": [
+            "@cs-check",
+            "@analyse",
+            "@test"
+        ]
+    }
+}
