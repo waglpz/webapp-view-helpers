@@ -1,0 +1,7 @@
+*.log
+/.build-output
+/.env
+composer.lock
+/phpunit.xml
+/vendor/
+
