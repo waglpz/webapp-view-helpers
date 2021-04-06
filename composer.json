@@ -6,7 +6,7 @@
     "authors": [
         {
             "name": "Alexander Hutorezki",
-            "email": "huto@wa-gruppe.de"
+            "email": "alexander.hutorezki@gmail.com"
         }
     ],
     "minimum-stability": "dev",
@@ -21,10 +21,10 @@
     "require": {
         "php": "^7.4",
         "ext-apcu": "*",
-        "ext-intl": "*"
+        "ext-intl": "*",
+        "doctrine/coding-standard": "^8.2"
     },
     "require-dev": {
-        "doctrine/coding-standard": "^7.0",
         "phpstan/phpstan": "^0.12",
         "phpstan/phpstan-deprecation-rules": "^0.12",
         "phpstan/phpstan-doctrine": "^0.12",

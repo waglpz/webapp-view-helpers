@@ -10,7 +10,7 @@ use Waglpz\View\Helpers\Factory\Factory;
 final class ViewHelpersFactoryTest extends TestCase
 {
     /** @test */
-    public function fehlerWirdProduziertBeimHolenUnbekannterViewHelper() : void
+    public function fehlerWirdProduziertBeimHolenUnbekannterViewHelper(): void
     {
         $this->expectException(\RuntimeException::class);
         $this->expectErrorMessage(\sprintf('Unbekannter View Helper %s', 'unknown'));
@@ -22,10 +22,10 @@ final class ViewHelpersFactoryTest extends TestCase
     }
 
     /** @test */
-    public function viewHelperWirdProduziertAusClosure() : void
+    public function viewHelperWirdProduziertAusClosure(): void
     {
         $helpers            = [
-            'toUC' => static fn($param = null) => $param ? \strtoupper($param) : '',
+            'toUC' => static fn ($param = null) => $param ? \strtoupper($param) : '',
         ];
         $viewHelpersFactory = new Factory($helpers);
         /** @noinspection PhpUndefinedMethodInspection */
@@ -41,10 +41,10 @@ final class ViewHelpersFactoryTest extends TestCase
     }
 
     /** @test */
-    public function viewHelperWirdProduziertAusClass() : void
+    public function viewHelperWirdProduziertAusClass(): void
     {
         $helper = new class () {
-            public function __toString() : string
+            public function __toString(): string
             {
                 return 'test ok';
             }
@@ -68,10 +68,10 @@ final class ViewHelpersFactoryTest extends TestCase
     }
 
     /** @test */
-    public function viewHelperWirdProduziertAusInvokableClass() : void
+    public function viewHelperWirdProduziertAusInvokableClass(): void
     {
         $helper = new class () {
-            public function __invoke(string $arg) : string
+            public function __invoke(string $arg): string
             {
                 return $arg . ' test ok';
             }

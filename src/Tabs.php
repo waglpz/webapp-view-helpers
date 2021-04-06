@@ -11,7 +11,7 @@ final class Tabs
     /** @var array<string>|null */
     private static ?array $rootClasses;
     /** @var array<self> */
-    private array  $tabs;
+    private array $tabs;
     private string $active;
     private string $id;
     private string $disabled;
@@ -36,7 +36,7 @@ final class Tabs
         $this->tabs           = [];
     }
 
-    public function firstTab() : self
+    public function firstTab(): self
     {
         $this->tabs   = [];
         $this->tabs[] = $this;
@@ -44,7 +44,7 @@ final class Tabs
         return $this;
     }
 
-    public function nextTab() : self
+    public function nextTab(): self
     {
         $self         = new self();
         $self->tabs   = $this->tabs;
@@ -53,7 +53,7 @@ final class Tabs
         return $self;
     }
 
-    public function active() : self
+    public function active(): self
     {
         $this->active = 'active';
 
@@ -61,21 +61,21 @@ final class Tabs
     }
 
     /** @param  array<string> $classes */
-    public function classes(array $classes) : self
+    public function classes(array $classes): self
     {
         $this->classes = $classes;
 
         return $this;
     }
 
-    public function disabled() : self
+    public function disabled(): self
     {
         $this->disabled = 'disabled';
 
         return $this;
     }
 
-    public function id(string $id) : self
+    public function id(string $id): self
     {
         foreach ($this->tabs as $tab) {
             if (\strcasecmp($tab->id, $id) === 0) {
@@ -88,25 +88,25 @@ final class Tabs
         return $this;
     }
 
-    public function label(string $label) : self
+    public function label(string $label): self
     {
         $this->label = $label;
 
         return $this;
     }
 
-    public function href(string $href) : self
+    public function href(string $href): self
     {
         $this->href = $href;
 
         return $this;
     }
 
-    public function __toString() : string
+    public function __toString(): string
     {
         $tabs                  = \array_reduce(
             $this->tabs,
-            static function (string $acc, self $tab) : string {
+            static function (string $acc, self $tab): string {
                 $acc .= $tab->template();
 
                 return $acc;
@@ -136,7 +136,7 @@ final class Tabs
 HTML;
     }
 
-    private function template() : string
+    private function template(): string
     {
         $class = \implode(' ', $this->classes ?? ['nav-item', 'nav-link', 'mr-1', $this->active, $this->disabled]);
 

@@ -7,7 +7,7 @@ namespace Waglpz\View\Helpers;
 final class DateFormatter
 {
     private \DateTimeInterface $dateTime;
-    private string            $pattern;
+    private string $pattern;
 
     /**
      * for pattern values see http://userguide.icu-project.org/formatparse/datetime#TOC-DateTimePatternGenerator
@@ -18,7 +18,7 @@ final class DateFormatter
         $this->pattern  = $pattern;
     }
 
-    public function __toString() : string
+    public function __toString(): string
     {
         $formatter = new \IntlDateFormatter(
             \Locale::getDefault(),
