@@ -22,6 +22,7 @@
         "php": "^7.4",
         "ext-apcu": "*",
         "ext-intl": "*",
+        "waglpz/webapp": "dev-feat/dic",
         "doctrine/coding-standard": "^8.2"
     },
     "require-dev": {
@@ -39,7 +40,10 @@
     "autoload": {
         "psr-4": {
             "Waglpz\\View\\Helpers\\": "src/"
-        }
+        },
+        "files": [
+            "src/functions.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

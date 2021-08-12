@@ -8,6 +8,8 @@ use RuntimeException;
 use Waglpz\View\Helpers\DateFormatter;
 use Waglpz\View\Helpers\Tabs;
 
+use function Waglpz\Webapp\container;
+
 /**
  * @method DateFormatter dateFormat(\DateTimeInterface $time, string $pattern = 'd.MMMM.yyyy') : string
  * @method Tabs tabs() : Tabs
@@ -39,7 +41,28 @@ final class Factory
         }
 
         if (\method_exists($this->helpers[$name], '__invoke')) {
-            return (new $this->helpers[$name]())(...$arguments);
+            $viewHelperClass = $this->helpers[$name];
+            if (container()->has($viewHelperClass)) {
+                $viewHelper = container()->get($this->helpers[$name]);
+
+                if (\is_callable($viewHelper)) {
+                    return $viewHelper(...$arguments);
+                }
+
+                throw new RuntimeException(
+                    \sprintf(
+                        'Trying to invoke View Helper "%s" but it might not be a callable.',
+                        $viewHelperClass
+                    )
+                );
+            }
+
+            throw new RuntimeException(
+                \sprintf(
+                    'Can not instatiate View Hlper "%s".',
+                    $viewHelperClass
+                )
+            );
         }
 
         return new $this->helpers[$name](...$arguments);
