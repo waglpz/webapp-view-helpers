@@ -22,10 +22,10 @@
         "php": "^7.4",
         "ext-apcu": "*",
         "ext-intl": "*",
-        "waglpz/webapp": "dev-feat/dic",
-        "doctrine/coding-standard": "^8.2"
+        "waglpz/webapp": "^v1.1"
     },
     "require-dev": {
+        "doctrine/coding-standard": "^9.0",
         "phpstan/phpstan": "^0.12",
         "phpstan/phpstan-deprecation-rules": "^0.12",
         "phpstan/phpstan-doctrine": "^0.12",
