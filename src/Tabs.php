@@ -46,16 +46,16 @@ final class Tabs
 
     public function nextTab(): self
     {
-        $self         = new self();
+        $self         = new self(self::$rootClasses, self::$wrapperClasses);
         $self->tabs   = $this->tabs;
         $self->tabs[] = $self;
 
         return $self;
     }
 
-    public function active(): self
+    public function active(bool $is = true): self
     {
-        $this->active = 'active';
+        $this->active = $is === true ? 'active' : '';
 
         return $this;
     }
