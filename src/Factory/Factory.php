@@ -6,12 +6,14 @@ namespace Waglpz\View\Helpers\Factory;
 
 use RuntimeException;
 use Waglpz\View\Helpers\DateFormatter;
+use Waglpz\View\Helpers\SortingButtons;
 use Waglpz\View\Helpers\Tabs;
 
 use function Waglpz\Webapp\container;
 
 /**
  * @method DateFormatter dateFormat(\DateTimeInterface $time, string $pattern = 'd.MMMM.yyyy') : string
+ * @method SortingButtons sortingButtons() : Tabs
  * @method Tabs tabs() : Tabs
  */
 final class Factory
