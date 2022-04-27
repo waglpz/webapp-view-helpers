@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Waglpz\View\Helpers;
+namespace Waglpz\Webapp\View\Helpers;
 
 final class Tabs
 {

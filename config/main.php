@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 return [
     'view'              => [
-        'view_helper_factory' => \Waglpz\View\Helpers\Factory\Factory::class,
+        'view_helper_factory' => \Waglpz\Webapp\View\Helpers\Factory\Factory::class,
     ],
     'viewHelpers'       => [
-        'dateFormat' => \Waglpz\View\Helpers\DateFormatter::class,
+        'dateFormat' => \Waglpz\Webapp\View\Helpers\DateFormatter::class,
     ],
 ];

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Waglpz\View\Helpers\Tests;
+namespace Waglpz\Webapp\View\Helpers\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Waglpz\View\Helpers\DateFormatter;
+use Waglpz\Webapp\View\Helpers\DateFormatter;
 
 final class DateFormatterTest extends TestCase
 {

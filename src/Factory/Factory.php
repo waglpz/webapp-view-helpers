@@ -2,17 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Waglpz\View\Helpers\Factory;
+namespace Waglpz\Webapp\View\Helpers\Factory;
 
+use Psr\Container\ContainerInterface;
 use RuntimeException;
-use Waglpz\View\Helpers\DateFormatter;
-use Waglpz\View\Helpers\SortingButtons;
-use Waglpz\View\Helpers\Tabs;
-
-use function Waglpz\Webapp\container;
+use Waglpz\Webapp\View\Helpers\DateFormatter;
+use Waglpz\Webapp\View\Helpers\SortingButtons;
+use Waglpz\Webapp\View\Helpers\Tabs;
 
 /**
- * @method DateFormatter dateFormat(\DateTimeInterface $time, string $pattern = 'd.MMMM.yyyy') : string
+ * @method DateFormatter dateFormat($time, string $pattern = 'd.MMMM.yyyy') : string
  * @method SortingButtons sortingButtons() : Tabs
  * @method Tabs tabs() : Tabs
  */
@@ -20,11 +19,17 @@ final class Factory
 {
     /** @var array<string,string|\Closure> */
     private array $helpers;
+    private ContainerInterface $container;
 
     /** @param array<string,string|\Closure> $helpers */
     public function __construct(array $helpers)
     {
         $this->helpers = $helpers;
+    }
+
+    public function setContainer(ContainerInterface $container): void
+    {
+        $this->container = $container;
     }
 
     /**
@@ -44,8 +49,8 @@ final class Factory
 
         if (\method_exists($this->helpers[$name], '__invoke')) {
             $viewHelperClass = $this->helpers[$name];
-            if (container()->has($viewHelperClass)) {
-                $viewHelper = container()->get($this->helpers[$name]);
+            if ($this->container->has($viewHelperClass)) {
+                $viewHelper = $this->container->get($this->helpers[$name]);
 
                 if (\is_callable($viewHelper)) {
                     return $viewHelper(...$arguments);
@@ -61,7 +66,7 @@ final class Factory
 
             throw new RuntimeException(
                 \sprintf(
-                    'Can not instatiate View Hlper "%s".',
+                    'Can not instantiate View Helper "%s".',
                     $viewHelperClass
                 )
             );

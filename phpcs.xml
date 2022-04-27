@@ -18,7 +18,6 @@
     <!-- Paths to check -->
     <exclude-pattern>*.js</exclude-pattern>
     <exclude-pattern>*.css</exclude-pattern>
-    <exclude-pattern>vendor/*</exclude-pattern>
     <file>src</file>
     <file>tests</file>
 </ruleset>

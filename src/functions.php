@@ -3,21 +3,30 @@
 
 declare(strict_types=1);
 
-namespace Waglpz\View\Helpers;
+namespace Waglpz\Webapp\View\Helpers;
 
-use function Waglpz\Webapp\container;
+use Dice\Dice;
 
-if (! \function_exists('Waglpz\View\Helpers\viewHelpers')) {
+if (! \function_exists('Waglpz\Webapp\View\Helpers\viewHelpers')) {
     /** @return Factory\Factory&\_stub @phpstan-ignore-next-line */
-    function viewHelpers() /* @phpstan-ignore-line */
+    function viewHelpers()
     {
         static $viewHelpers = null;
         if ($viewHelpers === null) {
-            $viewHelpers = container()->get(Factory\Factory::class);
+            if (\function_exists('Waglpz\Webapp\container')) {
+                $container = \Waglpz\Webapp\container();
+            } else {
+                $dice      = new Dice();
+                $dicRules  = include __DIR__ . '/../config/dic.rules.php';
+                $dice      = $dice->addRules($dicRules);
+                $container = new Container($dice);
+            }
+
+            $viewHelpers = $container->get(Factory\Factory::class);
+            \assert($viewHelpers instanceof Factory\Factory);
+            $viewHelpers->setContainer($container);
         }
 
-        /** @phpstan-var Factory\Factory&\_stub $viewHelpers*/
-
-        return $viewHelpers; /* @phpstan-ignore-line */
+        return $viewHelpers;
     }
 }
