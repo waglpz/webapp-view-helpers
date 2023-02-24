@@ -17,14 +17,11 @@ use Waglpz\Webapp\View\Helpers\Tabs;
  */
 final class Factory
 {
-    /** @var array<string,string|\Closure> */
-    private array $helpers;
     private ContainerInterface $container;
 
     /** @param array<string,string|\Closure> $helpers */
-    public function __construct(array $helpers)
+    public function __construct(private array $helpers)
     {
-        $this->helpers = $helpers;
     }
 
     public function setContainer(ContainerInterface $container): void
@@ -32,12 +29,8 @@ final class Factory
         $this->container = $container;
     }
 
-    /**
-     * @param array<mixed> $arguments
-     *
-     * @return mixed
-     */
-    public function __call(string $name, array $arguments)
+    /** @param array<mixed> $arguments */
+    public function __call(string $name, array $arguments): mixed
     {
         if (! isset($this->helpers[$name])) {
             throw new RuntimeException(\sprintf('Unbekannter View Helper %s', $name));
@@ -59,16 +52,16 @@ final class Factory
                 throw new RuntimeException(
                     \sprintf(
                         'Trying to invoke View Helper "%s" but it might not be a callable.',
-                        $viewHelperClass
-                    )
+                        $viewHelperClass,
+                    ),
                 );
             }
 
             throw new RuntimeException(
                 \sprintf(
                     'Can not instantiate View Helper "%s".',
-                    $viewHelperClass
-                )
+                    $viewHelperClass,
+                ),
             );
         }
 

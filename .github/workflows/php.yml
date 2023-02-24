@@ -14,7 +14,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Validate composer.json
+    - name: Validate composer.json and composer.lock
       run: composer validate
 
     - name: Cache Composer packages
@@ -27,8 +27,10 @@ jobs:
           ${{ runner.os }}-php-
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
+      env:
+        update: true
       with:
-        php-version: '7.4'
+        php-version: '8.2'
         coverage: pcov
         tools: composer:v2
 

@@ -7,9 +7,9 @@ namespace Waglpz\Webapp\View\Helpers;
 final class Tabs
 {
     /** @var array<string>|null */
-    private static ?array $wrapperClasses;
+    private static array|null $wrapperClasses;
     /** @var array<string>|null */
-    private static ?array $rootClasses;
+    private static array|null $rootClasses;
     /** @var array<self> */
     private array $tabs;
     private string $active;
@@ -18,13 +18,13 @@ final class Tabs
     private string $href;
     private string $label;
     /** @var array<string>|null */
-    private ?array $classes;
+    private array|null $classes;
 
     /**
      * @param  array<string> $rootElementClasses
      * @param  array<string> $wrapperClasses
      */
-    public function __construct(?array $rootElementClasses = null, ?array $wrapperClasses = null)
+    public function __construct(array|null $rootElementClasses = null, array|null $wrapperClasses = null)
     {
         self::$rootClasses    = $rootElementClasses;
         self::$wrapperClasses = $wrapperClasses;
@@ -111,11 +111,11 @@ final class Tabs
 
                 return $acc;
             },
-            ''
+            '',
         );
         $rootElementClasses    = \implode(
             ' ',
-            self::$rootClasses ?? ['sticky-top', 'ml-n4', 'mr-n4', 'bg-white', 'shadow-sm']
+            self::$rootClasses ?? ['sticky-top', 'ml-n4', 'mr-n4', 'bg-white', 'shadow-sm'],
         );
         $wrapperElementClasses = \implode(
             ' ',
@@ -128,7 +128,7 @@ final class Tabs
                 'ml-4',
                 'mr-4',
                 'border-0',
-            ]
+            ],
         );
 
         return <<<HTML
