@@ -14,7 +14,7 @@ final class ViewHelpersFactoryTest extends TestCase
     public function createContainer(): Container
     {
         $dice     = new Dice();
-        $dicRules = include __DIR__ . '/../config/dic.rules.php';
+        $dicRules = include __DIR__ . '/../config/container/view-helpers.rules.php';
         $dice     = $dice->addRules($dicRules);
 
         return new Container($dice);
@@ -24,7 +24,7 @@ final class ViewHelpersFactoryTest extends TestCase
     public function fehlerWirdProduziertBeimHolenUnbekannterViewHelper(): void
     {
         $this->expectException(\RuntimeException::class);
-        $this->expectErrorMessage(\sprintf('Unbekannter View Helper %s', 'unknown'));
+        $this->expectExceptionMessage(\sprintf('Unbekannter View Helper %s', 'unknown'));
         $helpers            = [];
         $container          = $this->createContainer();
         $viewHelpersFactory = new Factory($helpers);
@@ -68,7 +68,7 @@ final class ViewHelpersFactoryTest extends TestCase
         };
 
         $helpers            = [
-            'class' => \get_class($helper),
+            'class' => $helper::class,
         ];
         $container          = $this->createContainer();
         $viewHelpersFactory = new Factory($helpers);
@@ -98,7 +98,7 @@ final class ViewHelpersFactoryTest extends TestCase
         };
 
         $helpers            = [
-            'class' => \get_class($helper),
+            'class' => $helper::class,
         ];
         $container          = $this->createContainer();
         $viewHelpersFactory = new Factory($helpers);

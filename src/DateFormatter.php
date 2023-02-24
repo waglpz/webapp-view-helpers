@@ -7,18 +7,13 @@ namespace Waglpz\Webapp\View\Helpers;
 final class DateFormatter
 {
     private \DateTimeInterface $datetime;
-    private string $pattern;
 
     /**
      * for pattern values see
      * http://userguide.icu-project.org/formatparse/datetime#TOC-DateTimePatternGenerator
-     *
-     * @param string|int|\DateTimeInterface|mixed|null $datetime
      */
-    public function __construct($datetime, string $pattern = 'dd MMM yyyy HH:mm')
+    public function __construct(mixed $datetime, private string $pattern = 'dd MMM yyyy HH:mm')
     {
-        $this->pattern = $pattern;
-
         if ($datetime instanceof \DateTimeInterface) {
             $this->datetime = $datetime;
 
@@ -39,7 +34,7 @@ final class DateFormatter
 
         if (! \is_string($datetime)) {
             throw new \InvalidArgumentException(
-                'Invalid "$dateTime" given. One of int, null, string or DatetimeImmutable type is valid.'
+                'Invalid "$dateTime" given. One of int, null, string or DatetimeImmutable type is valid.',
             );
         }
 
@@ -47,7 +42,7 @@ final class DateFormatter
 
         if ($datetime === false) {
             throw new \InvalidArgumentException(
-                'Invalid "$dateTime" can not create Datetime Instance from given value.'
+                'Invalid "$dateTime" can not create Datetime Instance from given value.',
             );
         }
 
@@ -59,7 +54,7 @@ final class DateFormatter
         $formatter = new \IntlDateFormatter(
             \Locale::getDefault(),
             \IntlDateFormatter::SHORT,
-            \IntlDateFormatter::SHORT
+            \IntlDateFormatter::SHORT,
         );
         $formatter->setPattern($this->pattern);
         /** @phpstan-var string $formatted */
@@ -67,7 +62,7 @@ final class DateFormatter
         if ($formatter->getErrorCode() !== \U_ZERO_ERROR) {
             throw new \RuntimeException(
                 $formatter->getErrorMessage(),
-                $formatter->getErrorCode()
+                $formatter->getErrorCode(),
             );
         }
 

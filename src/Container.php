@@ -10,11 +10,8 @@ use Psr\Container\NotFoundExceptionInterface;
 
 class Container implements ContainerInterface
 {
-    private Dice $dice;
-
-    public function __construct(Dice $dice)
+    public function __construct(private Dice $dice)
     {
-        $this->dice = $dice;
     }
 
     public function get(string $id): object

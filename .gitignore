@@ -1,7 +1,7 @@
-*.log
-/.build-output
-/.env
-composer.lock
+/.idea
+/composer.lock
 /phpunit.xml
 /vendor/
-
+/var/
+!**/.gitignore
+!**/.gitkeep
