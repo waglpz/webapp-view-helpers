@@ -28,8 +28,8 @@
         "ext-intl": "*",
         "moddengine/dice": "^4.1",
         "psr/container": "^2.0",
-        "waglpz/config": "v2.0.0.x-dev",
-        "waglpz/di-container": "v2.0.0.x-dev"
+        "waglpz/config": "^v2.0",
+        "waglpz/di-container": "^v2.0"
     },
     "require-dev": {
         "doctrine/coding-standard": "^11.1",
