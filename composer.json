@@ -16,25 +16,30 @@
         "apcu-autoloader": true,
         "discard-changes": true,
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "phpstan/extension-installer": true
+        }
     },
     "require": {
-        "php": "^7.4",
+        "php": "^8.2",
         "ext-apcu": "*",
-        "ext-intl": "*",
-        "doctrine/coding-standard": "^8.2"
+        "ext-intl": "*"
     },
     "require-dev": {
-        "phpstan/phpstan": "^0.12",
-        "phpstan/phpstan-deprecation-rules": "^0.12",
-        "phpstan/phpstan-doctrine": "^0.12",
-        "phpstan/phpstan-phpunit": "^0.12",
-        "phpstan/phpstan-strict-rules": "^0.12",
-        "phpstan/phpstan-symfony": "^0.12",
-        "phpstan/phpstan-webmozart-assert": "^0.12",
+        "doctrine/coding-standard": "^13.0",
+        "phpstan/extension-installer": "^1.1",
+        "phpstan/phpstan": "^1.0",
+        "phpstan/phpstan-deprecation-rules": "^1.0",
+        "phpstan/phpstan-doctrine": "^1.0",
+        "phpstan/phpstan-phpunit": "^1.0",
+        "phpstan/phpstan-strict-rules": "^1.0",
+        "phpstan/phpstan-symfony": "^1.0",
+        "phpstan/phpstan-webmozart-assert": "^1.0",
         "phpunit/phpunit": "^9.1",
         "roave/security-advisories": "dev-master",
-        "squizlabs/php_codesniffer": "^3.5"
+        "squizlabs/php_codesniffer": "^3.13"
     },
     "autoload": {
         "psr-4": {
@@ -47,8 +52,8 @@
         }
     },
     "scripts": {
-        "cs-check": "phpcs -p --parallel=100",
-        "cs-fix": "phpcbf -p --parallel=100",
+        "cs-check": "phpcs -p --parallel=1",
+        "cs-fix": "phpcbf -p --parallel=1",
         "test": "phpunit --colors=always tests",
         "analyse": [
             "phpstan analyse --configuration=phpstan.neon src/ tests/ --level max"

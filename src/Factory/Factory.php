@@ -14,21 +14,13 @@ use Waglpz\View\Helpers\Tabs;
  */
 final class Factory
 {
-    /** @var array<string,string|\Closure> */
-    private array $helpers;
-
     /** @param array<string,string|\Closure> $helpers */
-    public function __construct(array $helpers)
+    public function __construct(private array $helpers)
     {
-        $this->helpers = $helpers;
     }
 
-    /**
-     * @param array<mixed> $arguments
-     *
-     * @return mixed
-     */
-    public function __call(string $name, array $arguments)
+    /** @param array<mixed> $arguments */
+    public function __call(string $name, array $arguments): mixed
     {
         if (! isset($this->helpers[$name])) {
             throw new RuntimeException(\sprintf('Unbekannter View Helper %s', $name));
@@ -38,8 +30,10 @@ final class Factory
             return $this->helpers[$name](...$arguments);
         }
 
-        if (\method_exists($this->helpers[$name], '__invoke')) {
-            return (new $this->helpers[$name]())(...$arguments);
+        $callable = new $this->helpers[$name]();
+
+        if (\method_exists($callable, '__invoke')) {
+            return $callable(...$arguments);
         }
 
         return new $this->helpers[$name](...$arguments);

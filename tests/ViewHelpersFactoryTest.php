@@ -13,7 +13,7 @@ final class ViewHelpersFactoryTest extends TestCase
     public function fehlerWirdProduziertBeimHolenUnbekannterViewHelper(): void
     {
         $this->expectException(\RuntimeException::class);
-        $this->expectErrorMessage(\sprintf('Unbekannter View Helper %s', 'unknown'));
+        $this->expectExceptionMessage(\sprintf('Unbekannter View Helper %s', 'unknown'));
         $helpers            = [];
         $viewHelpersFactory = new Factory($helpers);
         /** @noinspection PhpUndefinedMethodInspection */
@@ -24,7 +24,7 @@ final class ViewHelpersFactoryTest extends TestCase
     /** @test */
     public function viewHelperWirdProduziertAusClosure(): void
     {
-        $helpers            = [
+        $helpers = [
             'toUC' => static fn ($param = null) => $param ? \strtoupper($param) : '',
         ];
 
@@ -53,7 +53,7 @@ final class ViewHelpersFactoryTest extends TestCase
         };
 
         $helpers            = [
-            'class' => \get_class($helper),
+            'class' => $helper::class,
         ];
         $viewHelpersFactory = new Factory($helpers);
         /** @noinspection PhpUndefinedMethodInspection */
@@ -80,7 +80,7 @@ final class ViewHelpersFactoryTest extends TestCase
         };
 
         $helpers            = [
-            'class' => \get_class($helper),
+            'class' => $helper::class,
         ];
         $viewHelpersFactory = new Factory($helpers);
         /** @noinspection PhpUndefinedMethodInspection */
